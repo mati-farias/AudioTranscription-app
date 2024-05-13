@@ -159,12 +159,13 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
         className='flex flex-col items-center justify-center w-full max-w-full'
         encType='multipart/form-data'>
         <h2 className='text-2xl font-bold mb-2 text-white'>{label}</h2>
-        <p className='text-gray-400 mb-6'>
+        <p className='text-gray-400 pb-12'>
           Select an audio file to transcribe and press the button
-        </p>
-        <p className='text-gray-400 mb-6'>
+          <br />
           Be patient, it may take a few moments
         </p>
+        
+        
         <div className='flex flex-col lg:flex-row items-center justify-center w-full'>
           <input
             id='file-upload'

@@ -16,10 +16,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${inter.className}`}>
-        <div className='inset-0 -z-10 h-full w-full mx-auto [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]'>
-          {children}
-        </div>
+      <body className={`${inter.className} inset-0 min-h-screen h-full w-full mx-auto [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]`}>
+          {children}   
       </body>
     </html>
   );
