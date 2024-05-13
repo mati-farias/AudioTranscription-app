@@ -6,9 +6,9 @@ const Home = () => {
   
 
   return (
-    <div className='container mx-auto px-4 flex flex-col items-center justify-center w-screen'>
+    <div className='container mx-auto px-4 flex flex-col items-center justify-center w-screen pt-4 lg:pt-0'>
       <div className='w-full mb-6 flex flex-col items-center justify-center'>
-        <h1 className='text-6xl md:text-8xl font-bold text-white mb-6'>Transcript App</h1>{' '}
+        <h1 className='text-4xl lg:text-6xl text-white font-bold lg:text-white mb-6'>Transcript App</h1>
       
         <p className='text-gray-400 leading-relaxed'>
       

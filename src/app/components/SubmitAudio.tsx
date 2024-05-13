@@ -153,7 +153,7 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
   };
 
   return (
-    <div className='flex items-center justify-center h-auto border-purple-500 border-2 p-2 m-2'>
+    <div className='flex items-center justify-center h-auto border-purple-500 border-2 p-2 my-2'>
       <form
         onSubmit={onSubmitHandler}
         className='flex flex-col items-center justify-center w-full max-w-full'
@@ -165,7 +165,7 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
         <p className='text-gray-400 mb-6'>
           Be patient, it may take a few moments
         </p>
-        <div className='flex flex-col md:flex-row items-center justify-center w-full'>
+        <div className='flex flex-col lg:flex-row items-center justify-center w-full'>
           <input
             id='file-upload'
             type='file'

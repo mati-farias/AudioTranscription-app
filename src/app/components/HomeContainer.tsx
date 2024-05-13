@@ -22,14 +22,14 @@ function HomeContainer() {
   }, [filePath]);
 
   return (
-    <div className='container mb-6 w-screen'>
+    <div className='container mb-6 w-screen px-2 lg:px-0'>
       <div className='mb-6 text-white'>
         <SubmitAudio
           label='Upload File'
           uploadFileName='theFiles'
         />
       </div>
-      <div className='mb-6 mr-6'>
+      <div className='mb-6 '>
         <AudioPlayerContainer
           src={myFileLocation}
           messages={messages}
