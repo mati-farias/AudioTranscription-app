@@ -30,7 +30,7 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
 
   const setFilePath = useStore((state) => state.setFilePath);
   const setMessages = useStore((state) => state.setMessages);
-  console.log(process.env.NEXT_PUBLIC_GLADIA_API_KEY);
+  
 
   // Gladia API functions for tanscription
 
@@ -147,8 +147,6 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
     };
 
     (options as any).body = form;
-
-    console.log(options);
 
     fetch('https://api.gladia.io/v2/upload', options)
       .then((response) => response.json())
