@@ -21,7 +21,7 @@ const AudioPlayer = forwardRef<CustomReactPlayerInstance, AudioPlayerProps>(({ s
     return null;
   }
   return (
-    <div className='player-wrapper'>
+    <div className='mb-8'>
       <ReactPlayer
         ref={ref as any}
         url={src}

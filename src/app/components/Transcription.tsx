@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import ReactPlayer from 'react-player';
-import { CustomReactPlayerInstance } from './AudioPlayer';
 
 interface Message {
   content: string;
@@ -10,40 +8,33 @@ interface Message {
 }
 
 interface TranscriptionProps {
-  playerRef: React.RefObject<CustomReactPlayerInstance>;
   messages: Message[];
   onSeek: (time: number) => void;
 }
 
-
-
-const TranscriptionComponent: React.FC<TranscriptionProps> = ({
-  playerRef, messages, onSeek
-}) => {
+const TranscriptionComponent: React.FC<TranscriptionProps> = ({ messages, onSeek }) => {
   const [activeStart, setActiveStart] = useState<number | null>(null);
 
   const handleTranscriptClick = (start: number): void => {
     setActiveStart(start);
-    onSeek(start);  // Usando onSeek en lugar de playerRef.current.seekTo
+    onSeek(start);
   };
 
   return (
-    <div className='transcription-container p-4 bg-gray-100 rounded shadow'>
+    <div className="flex flex-col  bg-transparent text-white overflow-y-auto p-6 space-y-3 border-2 border-gray-700 rounded-xl mb-12">
       {messages.map((message, index) => (
         <div
           key={index}
-          className={`message flex items-center ${
-            message.role === 'agent' ? 'justify-start' : 'justify-end'
-          } p-2 my-2 rounded-full transition-all duration-300 ease-in-out cursor-pointer w-full`}
-          onClick={() => handleTranscriptClick(message.start)}>
-          <span
-            className={`text-lg font-medium ${
-              activeStart === message.start ? 'ring-2 ring-blue-300' : ''
-            } inline-block p-2 rounded-full ${
-              message.role === 'agent' ? 'bg-green-100' : 'bg-blue-100'
-            } text-black w-1/2 px-6`}>
+          className={`flex ${message.role === 'agent' ? 'justify-start' : 'justify-end'} mb-2 cursor-pointer`}
+          onClick={() => handleTranscriptClick(message.start)}
+        >
+          <div
+            className={`animate-fadeIn rounded-xl p-2 max-w-[50%] ${
+              activeStart === message.start ? 'bg-green-600 bg-opacity-40' : message.role === 'agent' ? 'bg-purple-700 bg-opacity-60' : 'bg-blue-400 bg-opacity-60'
+            } text-sm transition-all duration-300 ease-in-out`}
+          >
             {message.content}
-          </span>
+          </div>
         </div>
       ))}
     </div>

@@ -1,53 +1,37 @@
-"use client"
-import React, {useState} from 'react';
-import { UiFileInputButton } from './UiFileInputButton';
+'use client'
+import React, { useState, useEffect } from 'react';
+import { SubmitAudio } from './SubmitAudio';
 import AudioPlayerContainer from './AudioPlayerContainer';
 import { Message } from '@/Types';
-type Props = {
-  children?: React.ReactNode;
-  messages: Message[];
-};
-
-function HomeContainer(props: Props) {
-  const { children, messages} = props;
-  
-  const [myFileLocation, setMyFileLocation] = useState<null | string>(null);
+import { useStore } from '../store';
 
 
-  const getFilePathCallback = (filePath: string) => {
-   
-    function getRelativePath(filePath: string) {
-      // Find the index of "/public/" in the path
-      const publicIndex = filePath.indexOf('\\public\\') + '\\public\\'.length;
-    
-      // Extract the part of the path after "/public/"
-      let relativePath = filePath.slice(publicIndex);
-    
-      // Replace backslashes with forward slashes for URL compatibility
-      relativePath= relativePath.replace(/\\/g, '/');
-    
-      return '/' + relativePath;  // Ensure the path starts with a '/'
-    }
 
-    const relativePath = getRelativePath(filePath);
-    setMyFileLocation(relativePath);
-    console.log("myFileLocation", relativePath)
-   }
-  
+function HomeContainer() {
 
+  const filePath = useStore(state => state.filePath);
+  const [myFileLocation, setMyFileLocation] = useState<string>('public/audios/Test_Call.wav');
+
+  const messages = useStore(state => state.messages);
+
+  useEffect(() => {
+
+    // const relativePath = getRelativePath(filePath);
+    setMyFileLocation(filePath);
+    console.log("Updated myFileLocation:", filePath);
+  }, [filePath]);
 
   return (
     <div>
       <div className='mb-6 text-white'>
-        <UiFileInputButton
+        <SubmitAudio
           label='Upload File'
           uploadFileName='theFiles'
-          getFilePathCallback={getFilePathCallback}
         />
       </div>
       <div className='mb-6'>
         <AudioPlayerContainer
-          src={myFileLocation ?? '/audios/Test_Call.wav'}
+          src={myFileLocation}
           messages={messages}
         />
       </div>
