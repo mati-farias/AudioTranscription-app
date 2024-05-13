@@ -52,18 +52,18 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
   async function pollForResult(resultUrl: string, headers: any) {
     try {
       while (true) {
-        console.log('Polling for results...');
+        
         const pollResponse = await makeFetchRequest(resultUrl, { headers });
 
         if (pollResponse.status === 'done') {
-          console.log('- Transcription done: \n ');
+          
           setIsLoading(false);
-          console.log(pollResponse.result);
+          
           const messages = formatMessages(pollResponse.result.transcription.utterances);
           setMessages(messages);
           break;
         } else {
-          console.log('Transcription status : ', pollResponse.status);
+          
           await new Promise((resolve) => setTimeout(resolve, 1000));
         }
       }
@@ -96,14 +96,13 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
         'Content-Type': 'application/json',
       };
 
-      console.log('- Sending initial request to Gladia API...');
+      
       const initialResponse = await makeFetchRequest(gladiaUrl, {
         method: 'POST',
         headers,
         body: JSON.stringify(requestData),
       });
 
-      console.log('Initial response with Transcription ID :', initialResponse);
 
       if (initialResponse.result_url) {
         await pollForResult(initialResponse.result_url, headers);
