@@ -12,7 +12,7 @@ const Home = () => {
       
         <p className='text-gray-400 leading-relaxed'>
       
-          The Transcript App allows you to upload an audio file involving up to two people and receive a transcription of the audio in a convinient format. Upload your audio file (mp3, wav, etc.) and the app will return a beautifuly created chat. The app is built using the Gladia API, which is a powerful tool for speech recognition and transcription.
+          The Transcript App allows you to upload an audio file involving up to a two people conversation and receive a transcription of the audio in a convinient format. Upload your audio file (mp3, wav, etc.) and the app will return a beautifuly created chat. The app is built using the Gladia API, which is a powerful tool for speech recognition and transcription.
           
         </p>
       </div>

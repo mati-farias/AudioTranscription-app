@@ -162,7 +162,10 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
       >
         <h2 className='text-2xl font-bold mb-2 text-white'>{label}</h2>
         <p className='text-gray-400 mb-6'>
-          Select an audio file to upload to your account.
+          Select an audio file to transcribe and press the button
+        </p>
+        <p className='text-gray-400 mb-6'>
+          Be patient, it may take a few moments
         </p>
         <div className='flex items-center justify-between w-full '>
         
@@ -179,7 +182,7 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
           <button
             type='submit'
             className='px-4 py-2 bg-purple-700 text-white rounded hover:bg-blue-400 transition-colors focus:outline-none'>
-          {isLoading ? 'Uploading...' : 'Upload'}
+          {isLoading ? 'Transcribing...' : 'Transcribe'}
           </button>
         </div>
         {isLoading ? <div className="w-8 h-8 border-4 border-t-4 border-blue-500 rounded-full animate-spin"></div> : ''}
