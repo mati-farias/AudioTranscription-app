@@ -23,7 +23,7 @@ const AudioPlayerContainer: React.FC<AudioPlayerContainerProps> = ({src, message
   return (
     <div>
       <AudioPlayer ref={playerRef} src={src} />
-      <Transcription messages={messages} onSeek={handleSeek} playerRef={playerRef} />
+      <Transcription messages={messages} onSeek={handleSeek} />
     </div>
   );
 };

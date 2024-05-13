@@ -41,7 +41,7 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       return response.json();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Fetch error:", error.message);
       setIsLoading(false);
       alert("A problem occurred with the network request. Check if your file is in the correct format.");
@@ -67,7 +67,7 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
           await new Promise((resolve) => setTimeout(resolve, 1000));
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Polling error:", error.message);
       setIsLoading(false);
       alert("Failed to poll for results.");
@@ -108,7 +108,7 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
       if (initialResponse.result_url) {
         await pollForResult(initialResponse.result_url, headers);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Transcription error:", error.message);
       setIsLoading(false);
       alert("Failed to start transcription.");

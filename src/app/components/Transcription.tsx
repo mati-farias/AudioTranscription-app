@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CustomReactPlayerInstance } from './AudioPlayer';
 
 interface Message {
   content: string;
@@ -10,9 +11,10 @@ interface Message {
 interface TranscriptionProps {
   messages: Message[];
   onSeek: (time: number) => void;
+ 
 }
 
-const TranscriptionComponent: React.FC<TranscriptionProps> = ({ messages, onSeek }) => {
+const TranscriptionComponent: React.FC<TranscriptionProps> = ({ messages, onSeek}) => {
   const [activeStart, setActiveStart] = useState<number | null>(null);
 
   const handleTranscriptClick = (start: number): void => {
