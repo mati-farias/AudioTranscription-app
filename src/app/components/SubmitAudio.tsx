@@ -45,7 +45,7 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
       console.error("Fetch error:", error.message);
       setIsLoading(false);
       alert("A problem occurred with the network request. Check if your file is in the correct format.");
-      throw error; // Re-throw para que los llamadores puedan manejarlo también
+      throw error;
     }
   }
 
@@ -146,7 +146,7 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
       },
     };
 
-    options.body = form;
+    (options as any).body = form;
 
     console.log(options);
 
