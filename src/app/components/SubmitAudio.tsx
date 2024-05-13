@@ -30,7 +30,6 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
 
   const setFilePath = useStore((state) => state.setFilePath);
   const setMessages = useStore((state) => state.setMessages);
-  
 
   // Gladia API functions for tanscription
 
@@ -42,9 +41,11 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
       }
       return response.json();
     } catch (error: any) {
-      console.error("Fetch error:", error.message);
+      console.error('Fetch error:', error.message);
       setIsLoading(false);
-      alert("A problem occurred with the network request. Check if your file is in the correct format.");
+      alert(
+        'A problem occurred with the network request. Check if your file is in the correct format.'
+      );
       throw error;
     }
   }
@@ -52,25 +53,24 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
   async function pollForResult(resultUrl: string, headers: any) {
     try {
       while (true) {
-        
         const pollResponse = await makeFetchRequest(resultUrl, { headers });
 
         if (pollResponse.status === 'done') {
-          
           setIsLoading(false);
-          
-          const messages = formatMessages(pollResponse.result.transcription.utterances);
+
+          const messages = formatMessages(
+            pollResponse.result.transcription.utterances
+          );
           setMessages(messages);
           break;
         } else {
-          
           await new Promise((resolve) => setTimeout(resolve, 1000));
         }
       }
     } catch (error: any) {
-      console.error("Polling error:", error.message);
+      console.error('Polling error:', error.message);
       setIsLoading(false);
-      alert("Failed to poll for results.");
+      alert('Failed to poll for results.');
     }
   }
 
@@ -96,21 +96,19 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
         'Content-Type': 'application/json',
       };
 
-      
       const initialResponse = await makeFetchRequest(gladiaUrl, {
         method: 'POST',
         headers,
         body: JSON.stringify(requestData),
       });
 
-
       if (initialResponse.result_url) {
         await pollForResult(initialResponse.result_url, headers);
       }
     } catch (error: any) {
-      console.error("Transcription error:", error.message);
+      console.error('Transcription error:', error.message);
       setIsLoading(false);
-      alert("Failed to start transcription.");
+      alert('Failed to start transcription.');
     }
   }
 
@@ -136,7 +134,6 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
   const onSubmitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-    
 
     const options = {
       method: 'POST',
@@ -150,16 +147,17 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
     fetch('https://api.gladia.io/v2/upload', options)
       .then((response) => response.json())
       .then((response) => startTranscription(response.audio_url))
-      .catch((err) => setError('There was an error uploading the file: '+ err ));
+      .catch((err) =>
+        setError('There was an error uploading the file: ' + err)
+      );
   };
 
   return (
-    <div className='flex items-center justify-center h-auto border-purple-500  border-2 p-4'>
+    <div className='flex items-center justify-center h-auto border-purple-500 border-2 p-2 m-2'>
       <form
         onSubmit={onSubmitHandler}
-        className='flex flex-col items-center justify-center w-full max-w-2xl p-8'
-        encType="multipart/form-data"
-      >
+        className='flex flex-col items-center justify-center w-full max-w-full'
+        encType='multipart/form-data'>
         <h2 className='text-2xl font-bold mb-2 text-white'>{label}</h2>
         <p className='text-gray-400 mb-6'>
           Select an audio file to transcribe and press the button
@@ -167,12 +165,11 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
         <p className='text-gray-400 mb-6'>
           Be patient, it may take a few moments
         </p>
-        <div className='flex items-center justify-between w-full '>
-        
+        <div className='flex flex-col md:flex-row items-center justify-center w-full'>
           <input
             id='file-upload'
             type='file'
-            className='text-gray-200 border-gray-200 file:border-none file:px-4 file:py-2 file:rounded-lg file:text-white hover:file:bg-blue-400 file:bg-purple-700 focus:outline-none file:mr-4'
+            className='text-gray-200 border-gray-200 file:border-none file:px-4 file:py-2 file:rounded-lg file:text-white hover:file:bg-blue-400 file:bg-purple-700 focus:outline-none file:mr-4 md:file:mr-4'
             accept={acceptedFileTypes}
             multiple={allowMultipleFiles}
             name={uploadFileName}
@@ -181,15 +178,16 @@ export const SubmitAudio: React.FC<SubmitAudioProps> = ({
           />
           <button
             type='submit'
-            className='px-4 py-2 bg-purple-700 text-white rounded hover:bg-blue-400 transition-colors focus:outline-none'>
-          {isLoading ? 'Transcribing...' : 'Transcribe'}
+            className='mt-4 md:mt-0 px-4 py-2 bg-purple-700 text-white rounded hover:bg-blue-400 transition-colors focus:outline-none'>
+            {isLoading ? 'Transcribing...' : 'Transcribe'}
           </button>
         </div>
-        {isLoading ? <div className="w-8 h-8 border-4 border-t-4 border-blue-500 rounded-full animate-spin"></div> : ''}
+        {isLoading ? (
+          <div className='w-8 h-8 border-4 border-t-4 border-blue-500 rounded-full animate-spin mt-4 md:mt-0'></div>
+        ) : (
+          ''
+        )}
       </form>
-      
     </div>
   );
-  
-  
 };
