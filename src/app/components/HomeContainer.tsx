@@ -16,9 +16,9 @@ function HomeContainer() {
 
   useEffect(() => {
 
-    // const relativePath = getRelativePath(filePath);
+   
     setMyFileLocation(filePath);
-    console.log("Updated myFileLocation:", filePath);
+    
   }, [filePath]);
 
   return (
